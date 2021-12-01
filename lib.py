@@ -2,7 +2,6 @@ import inspect
 from os.path import splitext, basename
 from pathlib import Path
 import requests
-import browser_cookie3 as bc3
 
 YEAR = 2021
 ROOT_PATH = Path(__file__).parents[0]
@@ -26,8 +25,7 @@ def load_input(part=''):
 def download_input(day):
     Path(ROOT_PATH, 'inputs').mkdir(exist_ok=True)
     url = f'https://adventofcode.com/{YEAR}/day/{day}/input'
-    cookies = bc3.chrome(domain_name='adventofcode.com')
-    req = requests.get(url, cookies=cookies)
+    req = requests.get(url, cookies={'session': Path(ROOT_PATH, f'session.secret').read_text().strip()})
     Path(ROOT_PATH, get_filename(day)).write_bytes(req.content)
 
 

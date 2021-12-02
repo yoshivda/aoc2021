@@ -16,4 +16,4 @@ def part_two(data):
 
 if __name__ == '__main__':
     print(solve(load_input('small')))
-    print(solve(load_input()))
+    # print(solve(load_input()))

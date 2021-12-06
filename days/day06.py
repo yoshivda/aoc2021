@@ -26,9 +26,8 @@ def part_two(data):
         increases[f] += 1
 
     for day in range(256):
-        fish += increases[day]
-        increases[day + 9] += increases[day]
-        increases[day + 7] += increases[day]
+        fish += increases[day % 9]
+        increases[(day - 2) % 9] += increases[day % 9]
     return fish
 
 

@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from lib import load_input
 
 
@@ -20,7 +18,7 @@ def part_one(fish):
 
 
 def part_two(data):
-    increases = defaultdict(int)
+    increases = [0] * 9
     fish = len(data)
     for f in data:
         increases[f] += 1

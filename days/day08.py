@@ -17,24 +17,25 @@ def part_two(data):
     res = 0
     for line in data:
         digits, to_decode = line.split('|')
-        decode = {easy[len(digit)]: digit for digit in digits.split() if len(digit) in easy}
-        res += sum(to_num(number, decode) * 10 ** i for i, number in enumerate(reversed(to_decode.split())))
+        letters = {easy[len(digit)]: digit for digit in digits.split() if len(digit) in easy}
+        res += sum(to_num(number, letters) * 10 ** i for i, number in enumerate(reversed(to_decode.split())))
     return res
 
 
-def to_num(string, decode):
+def to_num(string, letters):
+    easy = {2: 1, 3: 7, 4: 4, 7: 8}
     if len(string) in easy:
         return easy[len(string)]
     elif len(string) == 5:
-        if all(x in string for x in decode[7]):
+        if all(x in string for x in letters[1]):
             return 3
-        elif sum(x in string for x in decode[4]) == 3:
+        elif sum(x in string for x in letters[4]) == 3:
             return 5
         return 2
     elif len(string) == 6:
-        if any(x not in string for x in decode[1]):
+        if any(x not in string for x in letters[1]):
             return 6
-        elif any(x not in string for x in decode[4]):
+        elif any(x not in string for x in letters[4]):
             return 0
         return 9
 

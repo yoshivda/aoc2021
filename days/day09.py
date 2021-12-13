@@ -5,8 +5,8 @@ from lib import load_input
 
 def solve(data):
     map = [[int(x) for x in line] for line in data.splitlines()]
-    # return part_one(map)
-    return part_two(map)
+    return part_one(map)
+    # return part_two(map)
 
 
 def adjacent_points(x, xmax, y, ymax):
@@ -16,7 +16,7 @@ def adjacent_points(x, xmax, y, ymax):
 def low_points(map):
     xmax, ymax = len(map[0]) - 1, len(map) - 1
     return {(x, y) for x in range(len(map[0])) for y in range(len(map))
-            if (adjacent := adjacent_points(x, xmax, y, ymax)) and all(map[py][px] > map[y][x]for px, py in adjacent)}
+            if all(map[py][px] > map[y][x] for px, py in adjacent_points(x, xmax, y, ymax))}
 
 
 def part_one(map):

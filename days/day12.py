@@ -26,7 +26,7 @@ def part_two(graph, node):
     def rec_helper(node, seen, duplicate):
         if node == 'end':
             return 1
-        new_seen = frozenset(seen | {node})
+        new_seen = frozenset(seen | {node}) if node.islower() else seen
         res = sum(rec_helper(nb, new_seen, duplicate) for nb in graph[node] if nb.isupper() or nb not in seen)
         if not duplicate:
             res += sum(rec_helper(nb, new_seen, True) for nb in graph[node] if nb.islower() and nb not in ('start', 'end') and nb in seen)
